@@ -23,6 +23,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
   const [filter, setFilter] = React.useState(atributos.data);
   const [searchValue, setSearchValue] = React.useState("");
   const [showOptions, setShowOptions] = React.useState(false);
+  const [focused, setFocused] = React.useState(false);
 
   React.useEffect(() => {
     setFilter(
@@ -36,7 +37,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
     <div className="w-full pb-3 text-xs md:text-sm md:pb-5">
       {atributos.titulo && <p>{atributos.titulo}</p>}
       <input
-        className="w-full bg-cyan-100 rounded outline-none px-2 py-3 border border-zinc-100 focus:border-aiesec transition-all duration-300"
+        className="w-full bg-cyan-100 rounded outline-none px-2 py-3 border border-zinc-100 focus:border-aiesec transition-all duration-300 peer"
         placeholder={atributos.placeholder}
         value={searchValue}
         name={atributos.name}
@@ -44,30 +45,38 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
         onFocus={() => {
           setShowOptions(true);
           setSearchValue("");
+          setFocused(true);
         }}
-        onBlur={() => filter.length < 1 && setSearchValue("")}
+        onBlur={() => {
+          setFocused(false);
+          return filter.length < 1 && setSearchValue("");
+        }}
       />
       {/* Options */}
-      {showOptions && (
-        <div
-          className={`w-full max-h-28 md:max-h-36 rounded overflow-y-scroll overflow-x-hidden shadow bg-notWhite block`}
-        >
-          <div className="w-full flex flex-col m-1">
-            {filter.map((d: string, idx: number) => (
-              <button
-                key={idx}
-                className="text-left p-1 hover:bg-cyan-100"
-                onClick={() => {
-                  setSearchValue(d);
-                  setShowOptions(false);
-                }}
-              >
-                {d}
-              </button>
-            ))}
+      <div className="relative">
+        {showOptions && (
+          <div
+            className={`w-full absolute top-0 left-0 p-1 max-h-32 md:max-h-44 rounded overflow-y-scroll overflow-x-hidden shadow-md bg-notWhite block ${
+              focused && "z-50"
+            }`}
+          >
+            <div className="w-full flex flex-col ">
+              {filter.map((d: string, idx: number) => (
+                <button
+                  key={idx}
+                  className="text-left p-1 hover:bg-cyan-100"
+                  onClick={() => {
+                    setSearchValue(d);
+                    setShowOptions(false);
+                  }}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
