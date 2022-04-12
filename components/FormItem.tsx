@@ -44,7 +44,7 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
           }
           className={`w-full rounded outline-none px-2 py-3 bg-cyan-100 border border-zinc-100  focus:border-aiesec transition-all duration-300  ${
             atributos.className
-          } ${error.length > 1 && "border-red-600"}`}
+          } ${error.length > 0 && "border-red-600"}`}
           placeholder={atributos.placeholder}
           name={atributos.name}
           value={value}
