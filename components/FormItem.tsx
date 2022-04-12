@@ -3,6 +3,7 @@ import { Error } from "./Error";
 import { IAtributos } from "../utils/interfaces";
 import { Validators } from "../utils/Validators";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+import { Info } from "../components/Info";
 
 interface Props {
   atributos: IAtributos;
@@ -27,7 +28,11 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
 
   return (
     <div className="w-full mb-3 text-xs md:text-sm md:mb-5 relative">
-      {atributos.titulo && <p>{atributos.titulo}</p>}
+      {atributos.titulo && <p className="block">{atributos.titulo}</p>}
+
+      {/* Solo para el password - Info*/}
+      {atributos.name === "Password" && <Info />}
+
       <div className="relative bg-cyan-100 rounded flex justify-between items-center">
         <input
           type={
@@ -50,17 +55,17 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
           onBlur={validate}
           formNoValidate
         />
-        {/* Solo para el password */}
+        {/* Solo para el password - Ojo*/}
         {atributos.name == "Password" && (
           <div className="absolute right-3">
             {eye ? (
               <EyeOffIcon
-                className="w-3 h-3 md:h-5 md:w-5 text-zinc-800 cursor-pointer"
+                className="w-4 h-4 md:h-5 md:w-5 text-zinc-800 cursor-pointer"
                 onClick={() => setEye(false)}
               />
             ) : (
               <EyeIcon
-                className="w-3 h-3 md:h-5 md:w-5 text-zinc-800 cursor-pointer"
+                className="w-4 h-4 md:h-5 md:w-5 text-zinc-800 cursor-pointer"
                 onClick={() => setEye(true)}
               />
             )}

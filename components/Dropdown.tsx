@@ -50,13 +50,13 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
       {/* Options */}
       {showOptions && (
         <div
-          className={`w-full max-h-28 rounded overflow-y-scroll overflow-x-hidden shadow bg-notWhite block`}
+          className={`w-full max-h-28 md:max-h-36 rounded overflow-y-scroll overflow-x-hidden shadow bg-notWhite block`}
         >
           <div className="w-full flex flex-col m-1">
             {filter.map((d: string, idx: number) => (
               <button
                 key={idx}
-                className="text-left p-1"
+                className="text-left p-1 hover:bg-cyan-100"
                 onClick={() => {
                   setSearchValue(d);
                   setShowOptions(false);
