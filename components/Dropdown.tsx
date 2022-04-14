@@ -37,7 +37,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
     <div className="w-full pb-3 text-xs md:text-sm md:pb-5">
       {atributos.titulo && <p>{atributos.titulo}</p>}
       <input
-        className="w-full bg-cyan-100 rounded outline-none px-2 py-3 border border-zinc-100 focus:border-aiesec transition-all duration-300 peer"
+        className="w-full bg-blue-100 rounded outline-none px-2 py-3 border border-zinc-100 focus:border-aiesec transition-all duration-300 peer"
         placeholder={atributos.placeholder}
         value={searchValue}
         name={atributos.name}
@@ -64,7 +64,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
               {filter.map((d: string, idx: number) => (
                 <button
                   key={idx}
-                  className="text-left p-1 hover:bg-cyan-100"
+                  className="text-left p-1 hover:bg-blue-100"
                   onClick={() => {
                     setSearchValue(d);
                     setShowOptions(false);

@@ -33,7 +33,7 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
       {/* Solo para el password - Info*/}
       {atributos.name === "Password" && <Info />}
 
-      <div className="relative bg-cyan-100 rounded flex justify-between items-center">
+      <div className="relative bg-blue-100 rounded flex justify-between items-center">
         <input
           type={
             atributos.tipo === "password"
@@ -42,7 +42,7 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
                 : "text"
               : atributos.tipo
           }
-          className={`w-full rounded outline-none px-2 py-3 bg-cyan-100 border border-zinc-100  focus:border-aiesec transition-all duration-300  ${
+          className={`w-full rounded outline-none px-2 py-3 bg-blue-100 border border-zinc-100  focus:border-aiesec transition-all duration-300  ${
             atributos.className
           } ${error.length > 0 && "border-red-600"}`}
           placeholder={atributos.placeholder}
