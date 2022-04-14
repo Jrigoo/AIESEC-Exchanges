@@ -80,6 +80,7 @@ export const Form: React.FC<Props> = ({ className }) => {
         className={`w-full ${className}`}
         onSubmit={onSubmit}
         onFocus={() => setError([])}
+        noValidate
       >
         <h1 className="mb-2 text-3xl font-extrabold tracking-wide md:text-4xl md:mb-4">
           Registrarse
