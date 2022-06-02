@@ -53,7 +53,7 @@ export class Register {
         lc: this.expaId,
         allow_phone_communication: "true",
         allow_email_communication: "true",
-        selected_programmes: [7, 8, 9],
+        selected_programmes: [8],
       },
     });
 
