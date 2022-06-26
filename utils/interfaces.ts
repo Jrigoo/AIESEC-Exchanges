@@ -64,6 +64,7 @@ export interface IAtributos {
   tipo: "button" | "email" | "file" | "password" | "text" | "number" | "submit";
   placeholder: string;
   className?: string;
+  info?: string;
   name:
     | "First Name"
     | "Last Name"
@@ -97,10 +98,13 @@ export interface IFormItem {
   Edad: number;
   Ingles: INivelIngles;
   Estudios: IEstudios;
+  Programs: Array<string>;
   CV: IFile;
 }
 
 /* TYPES */
+
+export type IProgramas = "Pasantia" | "Voluntariado" | "Profesor";
 
 export type IReferrals =
   | "Amig@"
@@ -240,3 +244,80 @@ export type IEstudios =
   | "Pregrado (graduado)"
   | "Postgrado"
   | "Doctorado/Maestria";
+
+export type IBackgrounds =
+  | "Contabilidad"
+  | "Ingeniería Aeroespacial"
+  | "Agricultura"
+  | "Antropología"
+  | "Arqueología"
+  | "Arquitectura"
+  | "Arte"
+  | "Seguros"
+  | "Auditorías"
+  | "Ingeniería automotriz"
+  | "Banca"
+  | "Bioingeniería"
+  | "Biología"
+  | "Ciencia Biomédica"
+  | "Administración de Empresas"
+  | "Ingeniería Química"
+  | "Química"
+  | "Ingeniería civil"
+  | "Comunicación y periodismo"
+  | "Ingeniería Informática"
+  | "Ciencias de la Computación"
+  | "Diseño"
+  | "Ciencias de la Tierra"
+  | "Ecología"
+  | "Ciencias económicas"
+  | "Educación"
+  | "Ingeniería eléctrica"
+  | "Ingeniería electrónica"
+  | "Emprendimiento"
+  | "Ingeniería Ambiental"
+  | "Finanzas"
+  | "Geografía"
+  | "Diseño gráfico"
+  | "Ciencia de la salud"
+  | "Historia"
+  | "Recursos humanos"
+  | "Diseño industrial"
+  | "Ingeniería Industrial"
+  | "Relaciones Internacionales"
+  | "Comercio internacional"
+  | "Idiomas"
+  | "Ley"
+  | "Lingüística"
+  | "Literatura"
+  | "Logística"
+  | "Marketing"
+  | "Ingeniería de materiales"
+  | "Matemáticas"
+  | "Ingeniería Mecánica"
+  | "Artes de los medios"
+  | "Medicina"
+  | "Ciencias militares"
+  | "Música"
+  | "Nanotecnología"
+  | "Enfermería"
+  | "Nutrición"
+  | "Ingeniería del Petróleo"
+  | "Filosofía"
+  | "Física"
+  | "Ciencias Políticas"
+  | "Psicología"
+  | "Administración Pública"
+  | "Relaciones públicas"
+  | "Religión"
+  | "Trabajo Social"
+  | "Sociología"
+  | "Ingeniería o Desarrollo de software"
+  | "Deportes"
+  | "Estadísticas"
+  | "Ingeniería en Sistemas y Computación"
+  | "Ingeniería en Telecomunicaciones"
+  | "Teatro"
+  | "Turismo y gestión hotelera"
+  | "Veterinaria"
+  | "Otro";

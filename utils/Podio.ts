@@ -8,14 +8,19 @@ import {
   oAuthResponse,
   PodioFileResponse,
   IFormItem,
-  IFormData,
   IFile,
   PodioItemResponse,
   INivelIngles,
   IReferrals,
   IEstudios,
+  IProgramas,
 } from "./interfaces";
-import { PODIO_REFERENTES, NIVEL_INGLES, ESTUDIOS } from "./data";
+import {
+  PODIO_REFERENTES,
+  NIVEL_INGLES,
+  ESTUDIOS,
+  PODIO_PROGRAMAS,
+} from "./data";
 
 export class Podio {
   private API_URL = "https://api.podio.com";
@@ -50,7 +55,7 @@ export class Podio {
       return "Fail";
     }
   }
-  async createItem(formData: IFormData | IFormItem): Promise<number> {
+  async createItem(formData: IFormItem): Promise<number> {
     /* 
     Metodo para crear un nuevo Item o usuario. Obtiene la data del form.
     Retorna una promesa con el id del item
@@ -62,6 +67,11 @@ export class Podio {
     const nivelIngles = NIVEL_INGLES[formData["Ingles"] as INivelIngles];
     const Estudios = ESTUDIOS[formData["Estudios"] as IEstudios];
     const referralId = PODIO_REFERENTES[formData["Referral"] as IReferrals];
+
+    let programas = [];
+    for (const programa of formData["Programs"]) {
+      programas.push(PODIO_PROGRAMAS[programa as IProgramas]);
+    }
 
     const raw = JSON.stringify({
       fields: [
@@ -129,6 +139,12 @@ export class Podio {
           field_id: 233431608,
           label: "Estudios",
           values: [Estudios],
+        },
+        {
+          type: "category",
+          field_id: 233434297,
+          label: "Programa de interes ",
+          values: programas,
         },
       ],
     });
@@ -209,16 +225,17 @@ export class Podio {
       console.log("Error");
     }
   }
-  async registerSU(formData: IFormData | IFormItem): Promise<void> {
+  async registerSU(formData: IFormItem): Promise<void> {
     /* 
     Combina los 3 metodos previamente mencionados. Tomando en cuenta que js es asíncrono y que para hacer el attach es necesario tener un items y un archivo
     */
     this.token = await this.oAuth();
     const itemId = await this.createItem(formData);
-    const fileId = await this.submitFile(formData["CV"] as IFile);
-
-    if (itemId === -1 || fileId === -1) return;
-    const resolve = await this.attachFile(fileId, itemId);
-    console.log(resolve);
+    if (formData["CV"].name) {
+      const fileId = await this.submitFile(formData["CV"] as IFile);
+      if (itemId === -1 || fileId === -1) return;
+      const resolve = await this.attachFile(fileId, itemId);
+    }
+    return;
   }
 }

@@ -1,12 +1,4 @@
-import {
-  IEstudios,
-  IFile,
-  IFormData,
-  IFormItem,
-  INivelIngles,
-  IReferrals,
-  IUniversidad,
-} from "./interfaces";
+import { IFormItem } from "./interfaces";
 import {
   UNIVERSIDADES,
   ESTUDIOS,
@@ -52,7 +44,7 @@ export class Validators {
       return "Numero de telefono no valido";
     }
   }
-  static dropdowns(formData: IFormData | IFormItem) {
+  static dropdowns(formData: IFormItem) {
     /* Metodo para validar el password */
     const errors = [];
     if (!UNIVERSIDADES.includes(formData["Universidad"] as string)) {
@@ -74,16 +66,28 @@ export class Validators {
     }
     return errors;
   }
-  static empty(formData: IFormData | IFormItem) {
+  static empty(formData: IFormItem) {
     /* Metodo para validar campos vacios e los otros anteriormente mencionados */
     for (const value of Object.values(formData)) {
       if (!value) return "Por favor llenar los campos solicitados";
       break;
     }
 
-    /* Por si no suben el CV */
-    if (typeof formData["CV"] !== "string" && formData["CV"].size === 0) {
-      return "- Por favor subir la hoja de vida o CV";
+    /* Por si no suben el CV 
+      - Esto e ssolo en los casos que elijan profesor o Pasantia
+    */
+    if (
+      formData["Programs"].includes("Pasantia") ||
+      formData["Programs"].includes("Profesor")
+    ) {
+      if (typeof formData["CV"] !== "string" && formData["CV"].size === 0) {
+        return "- Por favor subir la hoja de vida o CV";
+      }
+    }
+
+    /* Por si no seleccionan el programa de interes */
+    if (formData["Programs"].length === 0) {
+      return "- Por favor seleccionar el programa de interes";
     }
 
     /* Por si ponen otra cosa en el dropdown */

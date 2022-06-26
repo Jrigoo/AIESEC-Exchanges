@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <title>AIESEC en Panamá</title>
         <meta
           name="description"
-          content="Form de registro para pasantias/voluntariados"
+          content="Form de registro para Pasantias/voluntariados"
         />
         <link rel="icon" href="/AIESEC-icon.png" />
       </Head>

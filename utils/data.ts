@@ -250,6 +250,36 @@ export const PODIO_REFERENTES = {
   Otro: 17,
 };
 
+export const EXPA_REFERENTES = {
+  "Amig@": "Friend",
+  "Información en el campus": "Information booth on campus",
+  "Presentación en aula de clases": "Classroom presentation",
+  Facebook: "Facebook",
+  Twitter: "Twitter",
+  Instagram: "Instagram",
+  LinkedIn: "LinkedIn",
+  "Otra red social": "Other social media channel",
+  "Motor de busqueda": "Search engine",
+  Evento: "Event",
+  Emails: "Emails",
+  Telegram: "Telegram",
+  "Medios (Revista, TV, Periódico o radio)":
+    "Media (magazine, TV, newspaper or radio)",
+  Otro: "Other",
+};
+
+export const EXPA_PROGRAMAS = {
+  Pasantia: 8,
+  Voluntariado: 7,
+  Profesor: 9,
+};
+
+export const PODIO_PROGRAMAS = {
+  Pasantia: 4,
+  Voluntariado: 1,
+  Profesor: 5,
+};
+
 export const BACKGROUNDS = [
   "Contabilidad",
   "Ingeniería Aeroespacial",
@@ -328,6 +358,84 @@ export const BACKGROUNDS = [
   "Otro",
 ];
 
+export const EXPA_BACKGROUNDS = {
+  Contabilidad: 10224,
+  "Ingeniería Aeroespacial": 10225,
+  Agricultura: 10226,
+  Antropología: 11275,
+  Arqueología: 10227,
+  Arquitectura: 10228,
+  Arte: 10229,
+  Seguros: 11276,
+  Auditorías: 11277,
+  "Ingeniería automotriz": 10230,
+  Banca: 10231,
+  Bioingeniería: 11278,
+  Biología: 10232,
+  "Ciencia Biomédica": 11279,
+  "Administración de Empresas": 10233,
+  "Ingeniería Química": 10234,
+  Química: 10235,
+  "Ingeniería civil": 10236,
+  "Comunicación y periodismo": 10237,
+  "Ingeniería Informática": 10238,
+  "Ciencias de la Computación": 10239,
+  Diseño: 11280,
+  "Ciencias de la Tierra": 11281,
+  Ecología: 11282,
+  "Ciencias económicas": 10240,
+  Educación: 10241,
+  "Ingeniería eléctrica": 10242,
+  "Ingeniería electrónica": 10243,
+  Emprendimiento: 11283,
+  "Ingeniería Ambiental": 10244,
+  Finanzas: 10245,
+  Geografía: 10246,
+  "Diseño gráfico": 10247,
+  "Ciencia de la salud": 11284,
+  Historia: 11285,
+  "Recursos humanos": 11286,
+  "Diseño industrial": 11287,
+  "Ingeniería Industrial": 10248,
+  "Relaciones Internacionales": 10249,
+  "Comercio internacional": 11288,
+  Idiomas: 11289,
+  Ley: 10250,
+  Lingüística: 10251,
+  Literatura: 10252,
+  Logística: 11290,
+  Marketing: 10253,
+  "Ingeniería de materiales": 10254,
+  Matemáticas: 10255,
+  "Ingeniería Mecánica": 10256,
+  "Artes de los medios": 11291,
+  Medicina: 10257,
+  "Ciencias militares": 10258,
+  Música: 11292,
+  Nanotecnología: 10259,
+  Enfermería: 11293,
+  Nutrición: 21248,
+  Otro: 10271,
+  "Ingeniería del Petróleo": 11294,
+  Filosofía: 10260,
+  Física: 10261,
+  "Ciencias Políticas": 10262,
+  Psicología: 10263,
+  "Administración Pública": 10264,
+  "Relaciones públicas": 10265,
+  Religión: 10266,
+  "Trabajo Social": 11295,
+  Sociología: 10267,
+  "Ingeniería o Desarrollo de software": 10268,
+  Deportes: 11296,
+  Estadísticas: 11297,
+  "Ingeniería en Sistemas y Computación": 11298,
+  "Ingeniería en Telecomunicaciones": 10269,
+  Teatro: 11299,
+  "Turismo y gestión hotelera": 10270,
+  Veterinaria: 21247,
+};
+
 export const NIVEL_INGLES = {
   "A1 - Principiante": 1,
   "A2 - Elemental": 2,
@@ -382,6 +490,7 @@ export const FORMINPUTS: Array<IAtributos> = [
     name: "Password",
     tipo: "password",
     placeholder: "Juan12345",
+    info: "Contraseña para tu cuenta de AIESEC.org",
   },
 ];
 
@@ -415,5 +524,15 @@ export const DROPDOWNITEMS = [
     name: "Estudios",
     data: Object.keys(ESTUDIOS),
     placeholder: "...",
+  },
+];
+
+export const MULTISELECTITEMS = [
+  {
+    titulo: "¿Programa de interes?",
+    name: "Referral",
+    data: ["Pasantia", "Voluntariado", "Profesor"],
+    placeholder: "Voluntariado, Pasantia ...",
+    info: "Puedes seleccionar varios programas",
   },
 ];

@@ -10,15 +10,6 @@ interface Props {
   };
 }
 
-/* 
-BUG:
-- Que pasa si alguien no selecciona algo directamente del dropdown. Buscar la manera de validar que solo pueda seleccionar del dropdown
-
-FIX:
-- Se hace una validación al final
-
-*/
-
 export const Dropdown: React.FC<Props> = ({ atributos }) => {
   const [filter, setFilter] = React.useState(atributos.data);
   const [searchValue, setSearchValue] = React.useState("");
@@ -80,5 +71,3 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
     </div>
   );
 };
-
-export default Dropdown;

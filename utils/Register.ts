@@ -1,14 +1,11 @@
 import { Podio } from "./Podio";
 import {
-  oAuthResponse,
-  PodioFileResponse,
   IFormItem,
-  IFormData,
-  IFile,
-  PodioItemResponse,
   ISegmentacion,
+  IProgramas,
+  IBackgrounds,
 } from "./interfaces";
-import { SEGMENTACION, LCIDs } from "./data";
+import { SEGMENTACION, LCIDs, EXPA_PROGRAMAS, EXPA_REFERENTES } from "./data";
 
 /* 
     Class para registrar al usuario tanto en Podio 
@@ -16,25 +13,33 @@ import { SEGMENTACION, LCIDs } from "./data";
 */
 
 export class Register {
-  private user: IFormData | IFormItem;
-  private expaId: number;
-  private podioId: number;
+  private user: IFormItem;
+  private segExpaId: number;
+  private segPodioId: number;
+  private progExpaID: Array<number>;
 
-  constructor(user: IFormData | IFormItem) {
+  constructor(user: IFormItem) {
     this.user = user;
-    this.expaId = 0;
-    this.podioId = 0;
+    this.segExpaId = 0;
+    this.segPodioId = 0;
+    this.progExpaID = [];
 
     /*  Metodo para verificar la universidad correspondiente */
     const universidad = user["Universidad"];
     for (const key of Object.keys(SEGMENTACION)) {
       if (SEGMENTACION[key as ISegmentacion].includes(universidad as string)) {
-        this.expaId = LCIDs[key as ISegmentacion][0];
-        this.podioId = LCIDs[key as ISegmentacion][1];
+        this.segExpaId = LCIDs[key as ISegmentacion][0];
+        this.segPodioId = LCIDs[key as ISegmentacion][1];
         break;
       }
     }
-    this.user["Podio Id"] = this.podioId;
+
+    const programas = user["Programs"];
+    for (const prog of programas) {
+      this.progExpaID.push(EXPA_PROGRAMAS[prog as IProgramas]);
+    }
+
+    this.user["Podio Id"] = this.segPodioId;
   }
 
   async expaRegister() {
@@ -50,10 +55,11 @@ export class Register {
         country_code: "+507",
         phone: this.user["Phone"],
         password: this.user["Password"],
-        lc: this.expaId,
+        lc: this.segExpaId,
         allow_phone_communication: "true",
         allow_email_communication: "true",
-        selected_programmes: [8],
+        selected_programmes: this.progExpaID,
+        referral_type: EXPA_REFERENTES[this.user["Referral"]],
       },
     });
 

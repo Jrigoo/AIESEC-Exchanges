@@ -6,11 +6,12 @@ import { FileInput } from "./FileInput";
 import { Register } from "../utils/Register";
 import { Error } from "./Error";
 import { Loader } from "./Loader";
+import { MultiSelect } from "./MultiSelect";
 
 import { useData } from "../hooks/useContext";
 import { Validators } from "../utils/Validators";
-import { FORMINPUTS, DROPDOWNITEMS } from "../utils/data";
-import { IFormItem, IFormData } from "../utils/interfaces";
+import { FORMINPUTS, DROPDOWNITEMS, MULTISELECTITEMS } from "../utils/data";
+import { IFormItem } from "../utils/interfaces";
 
 /* 
 FALTA
@@ -30,14 +31,14 @@ interface Props {
 export const Form: React.FC<Props> = ({ className }) => {
   const [error, setError] = React.useState<Array<string | undefined>>([]);
   const [loader, setLoader] = React.useState(false);
-  const { setSuccess } = useData();
+  const { setSuccess, Programs } = useData();
 
   const onSubmit: React.FormEventHandler = async (e): Promise<void> => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
-    const formData: IFormData | IFormItem = Object.fromEntries(form.entries());
-    const errorValidacion = Validators.empty(formData);
-
+    const rawData = Object.fromEntries(form.entries());
+    const formData = { ...rawData, Programs };
+    const errorValidacion = Validators.empty(formData as IFormItem);
     /* Revisamos si no hay errores de validación 
       - Si el error es un string, como el useState recibe solo array, le pasamos: [error]
       - Si el error es un array, pasamos el array
@@ -52,7 +53,7 @@ export const Form: React.FC<Props> = ({ className }) => {
     }
 
     //Si no hay errores de validación procedemos al registro en Expa
-    const register = new Register(formData);
+    const register = new Register(formData as IFormItem);
     const expaResponse = await register.expaRegister();
 
     //Revisamos si no hay errores de expa
@@ -93,12 +94,22 @@ export const Form: React.FC<Props> = ({ className }) => {
           {FORMINPUTS.map((data, idx: number) => (
             <FormItem key={idx} atributos={data} />
           ))}
+
+          {/* Programa de Interes */}
+          {MULTISELECTITEMS.map((data, idx) => (
+            <MultiSelect key={idx} atributos={data} />
+          ))}
+
           {/* Dropdowns */}
           {DROPDOWNITEMS.map((data, idx) => (
             <Dropdown key={idx} atributos={data} />
           ))}
-          {/* File input */}
-          <FileInput />
+
+          {/* File input - Solo para Pasantias y profesores */}
+          {(Programs.includes("Pasantia") || Programs.includes("Profesor")) && (
+            <FileInput />
+          )}
+
           {/* Submit button */}
           <input
             type="submit"
