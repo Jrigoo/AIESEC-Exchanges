@@ -101,8 +101,8 @@ export class Validators {
     /* Otros errores ya mencionados */
     if (
       this.password(formData["Password"] as string).length > 0 ||
-      this.email(formData["Email"] as string) ||
-      this.phone(formData["Phone"] as string)
+      this.email(formData["Email"] as string).length > 0 ||
+      this.phone(formData["Phone"] as string).length > 0
     ) {
       return "- Por favor corregir los errores mencionados";
     }
