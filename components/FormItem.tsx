@@ -16,13 +16,13 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
 
   function validate() {
     if (atributos.name == "Email") {
-      setError([Validators.email(value)]);
+      setError(Validators.email(value));
     }
     if (atributos.name == "Password") {
       setError(Validators.password(value));
     }
     if (atributos.name == "Phone") {
-      setError([Validators.phone(value)]);
+      setError(Validators.phone(value));
     }
   }
 

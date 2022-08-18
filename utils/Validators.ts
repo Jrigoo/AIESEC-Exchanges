@@ -29,20 +29,22 @@ export class Validators {
   }
   static email(email: string) {
     /* Método para validar el email */
-    if (!email) return "El email no puede estar vacío";
+    if (!email) return ["El email no puede estar vacío"];
     if (!email.match("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Z|a-z]{2,}")) {
-      return "Email no valido";
+      return ["Email no valido"];
     }
+    return [];
   }
   static phone(phone: string) {
     const regex = /^[+]*[0-9][-\s/0-9]*$/g;
-    if (!phone) return "El número no puede estar vacío";
+    if (!phone) return ["El número no puede estar vacío"];
     if (phone.length < 8) {
-      return "Numero de telefono no valido";
+      return ["Numero de telefono no valido"];
     }
     if (!regex.test(phone)) {
-      return "Numero de telefono no valido";
+      return ["Numero de telefono no valido"];
     }
+    return [];
   }
   static dropdowns(formData: IFormItem) {
     /* Metodo para validar el password */
