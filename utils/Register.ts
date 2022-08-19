@@ -1,10 +1,5 @@
 import { Podio } from "./Podio";
-import {
-  IFormItem,
-  ISegmentacion,
-  IProgramas,
-  IBackgrounds,
-} from "./interfaces";
+import { IFormItem, ISegmentacion, IProgramas } from "./interfaces";
 import { SEGMENTACION, LCIDs, EXPA_PROGRAMAS, EXPA_REFERENTES } from "./data";
 
 /* 

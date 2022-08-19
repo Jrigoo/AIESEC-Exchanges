@@ -231,7 +231,7 @@ export class Podio {
     */
     this.token = await this.oAuth();
     const itemId = await this.createItem(formData);
-    if (formData["CV"].name) {
+    if (formData["CV"] && formData["CV"].name) {
       const fileId = await this.submitFile(formData["CV"] as IFile);
       if (itemId === -1 || fileId === -1) return;
       const resolve = await this.attachFile(fileId, itemId);

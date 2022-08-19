@@ -13,8 +13,6 @@ VE -> 2008
 import { IAtributos } from "./interfaces";
 
 export const SEGMENTACION = {
-  Chiriquí: [],
-  Coclé: [],
   Santiago: [
     "Universidad de Panamá - Los Santos",
     "Universidad Latina - Chitré",
