@@ -146,6 +146,12 @@ export class Podio {
           label: "Programa de interes ",
           values: programas,
         },
+        {
+          type: "category",
+          field_id: 233431631,
+          label: "Contactado",
+          values: [2],
+        },
       ],
     });
 
