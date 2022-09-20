@@ -116,7 +116,7 @@ export const SEGMENTACION = {
     "No estudiando actualmente - UTP",
     "Universidad Tecnológica de Panamá - Sede Ciudad de Panamá",
   ],
-  VE: [],
+  VE: [""],
 };
 
 /* IDs de EXPA y Podio */
