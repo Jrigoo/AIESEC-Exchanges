@@ -41,7 +41,11 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
           setShowOptions(true);
           setSearchValue("");
           setFocused(true);
-          setPrograms([]);
+
+          //Si es un drop down de programas
+          if (atributos.name === "Programs") {
+            setPrograms([]);
+          }
         }}
         onBlur={() => {
           setFocused(false);
