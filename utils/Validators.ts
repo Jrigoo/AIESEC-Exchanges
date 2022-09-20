@@ -5,6 +5,7 @@ import {
   NIVEL_INGLES,
   BACKGROUNDS,
   PODIO_REFERENTES,
+  EXPA_PROGRAMAS,
 } from "./data";
 
 export class Validators {
@@ -66,6 +67,13 @@ export class Validators {
     if (!BACKGROUNDS.includes(formData["Background"] as string)) {
       errors.push("- Background/Carrera no valido");
     }
+    if (
+      !Object.keys(EXPA_PROGRAMAS).includes(formData["Programs"][0] as string)
+    ) {
+      errors.push(
+        "- Programa no valido. Por favor seleccionar el programa de interes"
+      );
+    }
     return errors;
   }
   static empty(formData: IFormItem) {
@@ -85,11 +93,6 @@ export class Validators {
       if (typeof formData["CV"] !== "string" && formData["CV"].size === 0) {
         return "- Por favor subir la hoja de vida o CV";
       }
-    }
-
-    /* Por si no seleccionan el programa de interes */
-    if (formData["Programs"].length === 0) {
-      return "- Por favor seleccionar el programa de interes";
     }
 
     /* Por si ponen otra cosa en el dropdown */

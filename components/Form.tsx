@@ -6,11 +6,10 @@ import { FileInput } from "./FileInput";
 import { Register } from "../utils/Register";
 import { Error } from "./Error";
 import { Loader } from "./Loader";
-import { MultiSelect } from "./MultiSelect";
 
 import { useData } from "../hooks/useContext";
 import { Validators } from "../utils/Validators";
-import { FORMINPUTS, DROPDOWNITEMS, MULTISELECTITEMS } from "../utils/data";
+import { FORMINPUTS, DROPDOWNITEMS } from "../utils/data";
 import { IFormItem } from "../utils/interfaces";
 
 /* 
@@ -93,11 +92,6 @@ export const Form: React.FC<Props> = ({ className }) => {
           {/* Inputs */}
           {FORMINPUTS.map((data, idx: number) => (
             <FormItem key={idx} atributos={data} />
-          ))}
-
-          {/* Programa de Interes */}
-          {MULTISELECTITEMS.map((data, idx) => (
-            <MultiSelect key={idx} atributos={data} />
           ))}
 
           {/* Dropdowns */}

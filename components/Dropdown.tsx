@@ -1,4 +1,5 @@
 import React from "react";
+import { useData } from "../hooks/useContext";
 
 interface Props {
   atributos: {
@@ -15,6 +16,9 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
   const [searchValue, setSearchValue] = React.useState("");
   const [showOptions, setShowOptions] = React.useState(false);
   const [focused, setFocused] = React.useState(false);
+
+  //Si es el dropdown de programas
+  const { setPrograms } = useData();
 
   React.useEffect(() => {
     setFilter(
@@ -37,6 +41,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
           setShowOptions(true);
           setSearchValue("");
           setFocused(true);
+          setPrograms([]);
         }}
         onBlur={() => {
           setFocused(false);
@@ -52,16 +57,21 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
             }`}
           >
             <div className="w-full flex flex-col ">
-              {filter.map((d: string, idx: number) => (
+              {filter.map((value: string, idx: number) => (
                 <button
                   key={idx}
                   className="text-left p-1 hover:bg-blue-100"
                   onClick={() => {
-                    setSearchValue(d);
+                    setSearchValue(value);
                     setShowOptions(false);
+
+                    //Si es un drop down de programas
+                    if (atributos.name === "Programs") {
+                      setPrograms([value]);
+                    }
                   }}
                 >
-                  {d}
+                  {value}
                 </button>
               ))}
             </div>

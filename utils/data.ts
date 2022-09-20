@@ -57,6 +57,7 @@ export const SEGMENTACION = {
     "UDELAS - Veraguas",
     "ISAE - Santiago, Veraguas",
     "Universidad de Panamá - Veraguas",
+    "Otro",
   ],
   UP: [
     "QLU Panama - University of Louisville",
@@ -114,9 +115,8 @@ export const SEGMENTACION = {
     "USMA - Campus Ciudad de Panamá",
     "No estudiando actualmente - UTP",
     "Universidad Tecnológica de Panamá - Sede Ciudad de Panamá",
-    "Otro",
   ],
-  VE: ["Otro"],
+  VE: [],
 };
 
 /* IDs de EXPA y Podio */
@@ -492,6 +492,12 @@ export const FORMINPUTS: Array<IAtributos> = [
 
 export const DROPDOWNITEMS = [
   {
+    titulo: "¿Programa de interes?",
+    name: "Programs",
+    data: ["Pasantia", "Voluntariado", "Profesor"],
+    placeholder: "Voluntariado, Pasantia ...",
+  },
+  {
     titulo: "¿Como te enteraste de nosotros?",
     name: "Referral",
     data: Object.keys(PODIO_REFERENTES),
@@ -523,12 +529,4 @@ export const DROPDOWNITEMS = [
   },
 ];
 
-export const MULTISELECTITEMS = [
-  {
-    titulo: "¿Programa de interes?",
-    name: "Referral",
-    data: ["Pasantia", "Voluntariado", "Profesor"],
-    placeholder: "Voluntariado, Pasantia ...",
-    info: "Puedes seleccionar varios programas",
-  },
-];
+export const MULTISELECTITEMS = [];
