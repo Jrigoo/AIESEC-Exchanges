@@ -11,6 +11,13 @@ interface Props {
   };
 }
 
+/* 
+To DOs
+- Cambiar de Programas a Program (string)
+- Revisar el código y mejorar estructura
+
+*/
+
 export const Dropdown: React.FC<Props> = ({ atributos }) => {
   const [filter, setFilter] = React.useState(atributos.data);
   const [searchValue, setSearchValue] = React.useState("");
@@ -18,7 +25,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
   const [focused, setFocused] = React.useState(false);
 
   //Si es el dropdown de programas
-  const { setPrograms } = useData();
+  const { setProgram } = useData();
 
   React.useEffect(() => {
     setFilter(
@@ -43,8 +50,8 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
           setFocused(true);
 
           //Si es un drop down de programas
-          if (atributos.name === "Programs") {
-            setPrograms([]);
+          if (atributos.name === "Program") {
+            setProgram("");
           }
         }}
         onBlur={() => {
@@ -70,8 +77,8 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
                     setShowOptions(false);
 
                     //Si es un drop down de programas
-                    if (atributos.name === "Programs") {
-                      setPrograms([value]);
+                    if (atributos.name === "Program") {
+                      setProgram(value);
                     }
                   }}
                 >

@@ -82,10 +82,6 @@ export interface IAtributos {
 }
 
 export interface IFormData {
-  [k: string]: FormDataEntryValue;
-}
-
-export interface IFormItem {
   "First Name": string;
   "Last Name": string;
   "Podio Id": number;
@@ -98,14 +94,11 @@ export interface IFormItem {
   Edad: number;
   Ingles: INivelIngles;
   Estudios: IEstudios;
-  Programs: Array<string>;
+  Program: "Pasantia" | "Voluntariado" | "Profesor";
   CV: IFile;
 }
 
 /* TYPES */
-
-export type IProgramas = "Pasantia" | "Voluntariado" | "Profesor";
-
 export type IReferrals =
   | "Amig@"
   | "Información en el campus"

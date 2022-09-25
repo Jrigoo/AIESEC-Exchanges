@@ -1,4 +1,4 @@
-import { IFormItem } from "./interfaces";
+import { IFormData } from "./interfaces";
 import {
   UNIVERSIDADES,
   ESTUDIOS,
@@ -9,7 +9,7 @@ import {
 } from "./data";
 
 export class Validators {
-  static password(password: string) {
+  static validatePassword(password: string): Array<string> {
     /* Metodo para validar el password */
     const regex = /\d/;
     const errors = [];
@@ -28,7 +28,7 @@ export class Validators {
     }
     return errors;
   }
-  static email(email: string) {
+  static validateEmail(email: string): Array<string> {
     /* Método para validar el email */
     if (!email) return ["El email no puede estar vacío"];
     if (!email.match("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Z|a-z]{2,}")) {
@@ -36,7 +36,7 @@ export class Validators {
     }
     return [];
   }
-  static phone(phone: string) {
+  static validatePhone(phone: string): Array<string> {
     const regex = /^[+]*[0-9][-\s/0-9]*$/g;
     if (!phone) return ["El número no puede estar vacío"];
     if (phone.length < 8) {
@@ -47,67 +47,62 @@ export class Validators {
     }
     return [];
   }
-  static dropdowns(formData: IFormItem) {
+  static validateDropdown(formData: IFormData): Array<string> {
     /* Metodo para validar el password */
     const errors = [];
-    if (!UNIVERSIDADES.includes(formData["Universidad"] as string)) {
+    if (!UNIVERSIDADES.includes(formData["Universidad"])) {
       errors.push("- Universidad no valida");
     }
-    if (!Object.keys(ESTUDIOS).includes(formData["Estudios"] as string)) {
+    if (!Object.keys(ESTUDIOS).includes(formData["Estudios"])) {
       errors.push("- Estudios no validos");
     }
-    if (!Object.keys(NIVEL_INGLES).includes(formData["Ingles"] as string)) {
+    if (!Object.keys(NIVEL_INGLES).includes(formData["Ingles"])) {
       errors.push("- Nivel de ingles no valido");
     }
-    if (
-      !Object.keys(PODIO_REFERENTES).includes(formData["Referral"] as string)
-    ) {
+    if (!Object.keys(PODIO_REFERENTES).includes(formData["Referral"])) {
       errors.push("- Medio por el cual te enteraste no valido");
     }
-    if (!BACKGROUNDS.includes(formData["Background"] as string)) {
+    if (!BACKGROUNDS.includes(formData["Background"])) {
       errors.push("- Background/Carrera no valido");
     }
-    if (
-      !Object.keys(EXPA_PROGRAMAS).includes(formData["Programs"][0] as string)
-    ) {
+    if (!Object.keys(EXPA_PROGRAMAS).includes(formData["Program"])) {
       errors.push(
         "- Programa no valido. Por favor seleccionar el programa de interes"
       );
     }
     return errors;
   }
-  static empty(formData: IFormItem) {
-    /* Metodo para validar campos vacios e los otros anteriormente mencionados */
+  static empty(formData: IFormData): Array<string> {
+    //Metodo para validar campos vacios e los otros anteriormente mencionados
     for (const value of Object.values(formData)) {
-      if (!value) return "Por favor llenar los campos solicitados";
+      if (!value) return ["Por favor llenar los campos solicitados"];
       break;
     }
 
-    /* Por si no suben el CV 
-      - Esto e ssolo en los casos que elijan profesor o Pasantia
-    */
+    //Por si no suben el CV aplica para GV y GTa
     if (
-      formData["Programs"].includes("Pasantia") ||
-      formData["Programs"].includes("Profesor")
+      formData["Program"] === "Pasantia" ||
+      formData["Program"] === "Profesor"
     ) {
       if (typeof formData["CV"] !== "string" && formData["CV"].size === 0) {
-        return "- Por favor subir la hoja de vida o CV";
+        return ["- Por favor subir la hoja de vida o CV"];
       }
     }
 
-    /* Por si ponen otra cosa en el dropdown */
-    const dropdownError = this.dropdowns(formData);
+    //Por si ponen otra cosa en el dropdown
+    const dropdownError = this.validateDropdown(formData);
     if (dropdownError.length > 0) {
       return dropdownError;
     }
 
-    /* Otros errores ya mencionados */
+    //Revisar errores previamente mencionados
     if (
-      this.password(formData["Password"] as string).length > 0 ||
-      this.email(formData["Email"] as string).length > 0 ||
-      this.phone(formData["Phone"] as string).length > 0
+      this.validatePassword(formData["Password"] as string).length > 0 ||
+      this.validateEmail(formData["Email"] as string).length > 0 ||
+      this.validatePhone(formData["Phone"] as string).length > 0
     ) {
-      return "- Por favor corregir los errores mencionados";
+      return ["- Por favor corregir los errores mencionados"];
     }
+    return [];
   }
 }

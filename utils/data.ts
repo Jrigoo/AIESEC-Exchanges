@@ -493,7 +493,7 @@ export const FORMINPUTS: Array<IAtributos> = [
 export const DROPDOWNITEMS = [
   {
     titulo: "¿Programa de interes?",
-    name: "Programs",
+    name: "Program",
     data: ["Pasantia", "Voluntariado", "Profesor"],
     placeholder: "Voluntariado, Pasantia ...",
   },

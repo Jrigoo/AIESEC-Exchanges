@@ -1,25 +1,20 @@
 import { Podio } from "./Podio";
-import { IFormItem, ISegmentacion, IProgramas } from "./interfaces";
+import { IFormData, ISegmentacion } from "./interfaces";
 import { SEGMENTACION, LCIDs, EXPA_PROGRAMAS, EXPA_REFERENTES } from "./data";
 
-/* 
-    Class para registrar al usuario tanto en Podio 
-    como en expa
-*/
-
 export class Register {
-  private user: IFormItem;
+  private user: IFormData;
   private segExpaId: number;
   private segPodioId: number;
   private progExpaID: Array<number>;
 
-  constructor(user: IFormItem) {
+  constructor(user: IFormData) {
     this.user = user;
     this.segExpaId = 0;
     this.segPodioId = 0;
     this.progExpaID = [];
 
-    /*  Metodo para verificar la universidad correspondiente */
+    /* Metodo para verificar la universidad correspondiente */
     const universidad = user["Universidad"];
     for (const key of Object.keys(SEGMENTACION)) {
       if (SEGMENTACION[key as ISegmentacion].includes(universidad as string)) {
@@ -29,11 +24,7 @@ export class Register {
       }
     }
 
-    const programas = user["Programs"];
-    for (const prog of programas) {
-      this.progExpaID.push(EXPA_PROGRAMAS[prog as IProgramas]);
-    }
-
+    this.progExpaID.push(EXPA_PROGRAMAS[user["Program"]]);
     this.user["Podio Id"] = this.segPodioId;
   }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { Info } from "./Info";
 import { XIcon } from "@heroicons/react/outline";
-import { useData } from "../hooks/useContext";
 
 interface Props {
   atributos: {
@@ -15,16 +14,16 @@ interface Props {
 
 export const MultiSelect: React.FC<Props> = ({ atributos }) => {
   const [options, setOptions] = React.useState(atributos.data);
-  const { Programs, setPrograms } = useData();
+  const [selected, setSelected] = React.useState<Array<string>>([]);
 
   function addSelected(val: string) {
-    setPrograms([...Programs, val]);
+    setSelected([...selected, val]);
     setOptions(options.filter((o) => o !== val));
   }
 
   function removeSelected(val: string) {
     setOptions([...options, val]);
-    setPrograms(Programs.filter((s) => s !== val));
+    setSelected(selected.filter((s) => s !== val));
   }
 
   return (
@@ -36,16 +35,16 @@ export const MultiSelect: React.FC<Props> = ({ atributos }) => {
         type={"reset"}
       >
         {/* Placeholder */}
-        {Programs.length === 0 && (
+        {selected.length === 0 && (
           <p className="w-full px-2 text-left block text-gray-400">
             {atributos.placeholder}
           </p>
         )}
 
         {/* Selected options */}
-        {Programs.length > 0 && (
+        {selected.length > 0 && (
           <div className="w-full bg-blue-100 flex items-center flex-wrap gap-1">
-            {Programs.map((val, idx) => (
+            {selected.map((val, idx) => (
               <div
                 key={idx}
                 className="flex justify-between items-center bg-aiesec rounded px-2 py-1 ml-2 text-zinc-100"

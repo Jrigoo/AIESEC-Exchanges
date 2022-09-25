@@ -10,7 +10,7 @@ import { Loader } from "./Loader";
 import { useData } from "../hooks/useContext";
 import { Validators } from "../utils/Validators";
 import { FORMINPUTS, DROPDOWNITEMS } from "../utils/data";
-import { IFormItem } from "../utils/interfaces";
+import { IFormData } from "../utils/interfaces";
 
 /* 
 FALTA
@@ -30,30 +30,26 @@ interface Props {
 export const Form: React.FC<Props> = ({ className }) => {
   const [error, setError] = React.useState<Array<string | undefined>>([]);
   const [loader, setLoader] = React.useState(false);
-  const { setSuccess, Programs } = useData();
+  const { setSuccess, Program } = useData();
 
   const onSubmit: React.FormEventHandler = async (e): Promise<void> => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
-    const rawData = Object.fromEntries(form.entries());
-    const formData = { ...rawData, Programs };
-    const errorValidacion = Validators.empty(formData as IFormItem);
+    const formData: unknown = Object.fromEntries(form.entries());
+    const validationError = Validators.empty(formData as IFormData);
+
     /* Revisamos si no hay errores de validación 
       - Si el error es un string, como el useState recibe solo array, le pasamos: [error]
       - Si el error es un array, pasamos el array
     */
-    if (errorValidacion) {
+    if (validationError) {
       setLoader(false);
-      return setError(
-        typeof errorValidacion === "string"
-          ? [errorValidacion]
-          : errorValidacion
-      );
+      return setError(validationError);
     }
 
     //Si no hay errores de validación procedemos al registro en Expa
-    const register = new Register(formData as IFormItem);
-    const expaResponse = await register.expaRegister();
+    const register = new Register(formData as IFormData);
+    /* const expaResponse = await register.expaRegister();
 
     //Revisamos si no hay errores de expa
     if (Object.keys(expaResponse).includes("errors")) {
@@ -64,7 +60,7 @@ export const Form: React.FC<Props> = ({ className }) => {
       setError(e);
       setLoader(false);
       return;
-    }
+    } */
 
     //Si expa ta check, procedemos a Registrar en Podio. Que debería estar check
     register.podioRegister();
@@ -100,7 +96,7 @@ export const Form: React.FC<Props> = ({ className }) => {
           ))}
 
           {/* File input - Solo para Pasantias y profesores */}
-          {(Programs.includes("Pasantia") || Programs.includes("Profesor")) && (
+          {(Program.includes("Pasantia") || Program.includes("Profesor")) && (
             <FileInput />
           )}
 

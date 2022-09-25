@@ -1,19 +1,9 @@
-/* 
-TODOS
-
-- Falta pasar la información de la API a un .env para mayor seguridad
-*/
-
 import {
   oAuthResponse,
   PodioFileResponse,
-  IFormItem,
+  IFormData,
   IFile,
   PodioItemResponse,
-  INivelIngles,
-  IReferrals,
-  IEstudios,
-  IProgramas,
 } from "./interfaces";
 import {
   PODIO_REFERENTES,
@@ -27,9 +17,7 @@ export class Podio {
   private token = "No token";
 
   async oAuth(): Promise<string> {
-    /* 
-     Se realiza la autenticación y obtenemos el token para empezar a trabajar con los metodos de la API
-    */
+    //Se realiza la autenticación y obtenemos el token para empezar a trabajar con los metodos de la API
     const data = new FormData();
     data.append("grant_type", "app");
     data.append("app_id", process.env.NEXT_PUBLIC_APP_ID as string);
@@ -55,23 +43,17 @@ export class Podio {
       return "Fail";
     }
   }
-  async createItem(formData: IFormItem): Promise<number> {
-    /* 
-    Metodo para crear un nuevo Item o usuario. Obtiene la data del form.
-    Retorna una promesa con el id del item
-    */
+  async createItem(formData: IFormData): Promise<number> {
+    /* Metodo para crear un nuevo Item o usuario. Obtiene la data del form.
+    Retorna una promesa con el id del item */
     const headers = new Headers();
     headers.append("Authorization", `Bearer ${this.token}`);
     headers.append("Content-Type", "application/json");
 
-    const nivelIngles = NIVEL_INGLES[formData["Ingles"] as INivelIngles];
-    const Estudios = ESTUDIOS[formData["Estudios"] as IEstudios];
-    const referralId = PODIO_REFERENTES[formData["Referral"] as IReferrals];
-
-    let programas = [];
-    for (const programa of formData["Programs"]) {
-      programas.push(PODIO_PROGRAMAS[programa as IProgramas]);
-    }
+    const nivelIngles = NIVEL_INGLES[formData["Ingles"]];
+    const estudios = ESTUDIOS[formData["Estudios"]];
+    const referralId = PODIO_REFERENTES[formData["Referral"]];
+    const programa = PODIO_PROGRAMAS[formData["Program"]];
 
     const raw = JSON.stringify({
       fields: [
@@ -137,14 +119,14 @@ export class Podio {
         {
           type: "category",
           field_id: 233431608,
-          label: "Estudios",
-          values: [Estudios],
+          label: "estudios",
+          values: [estudios],
         },
         {
           type: "category",
           field_id: 233434297,
           label: "Programa de interes ",
-          values: programas,
+          values: [programa],
         },
         {
           type: "category",
@@ -204,11 +186,9 @@ export class Podio {
     fileId: number,
     itemId: number
   ): Promise<string | undefined> {
-    /* 
-    Metodo para ligar un archivo a un item previamente creado.
+    /* Metodo para ligar un archivo a un item previamente creado.
     Sus parametros son el ID del archvio y el item. Retorna
-    "Done!" asi nos aseguramos de que funciono todo correctamente
-    */
+    "Done!" asi nos aseguramos de que funciono todo correctamente*/
     const headers = new Headers();
     headers.append("Authorization", `Bearer ${this.token}`);
     headers.append("Content-Type", "application/json");
@@ -231,10 +211,8 @@ export class Podio {
       console.log("Error");
     }
   }
-  async registerSU(formData: IFormItem): Promise<void> {
-    /* 
-    Combina los 3 metodos previamente mencionados. Tomando en cuenta que js es asíncrono y que para hacer el attach es necesario tener un items y un archivo
-    */
+  async registerSU(formData: IFormData): Promise<void> {
+    /* Combina los 3 metodos previamente mencionados. Tomando en cuenta que js es asíncrono y que para hacer el attach es necesario tener un items y un archivo */
     this.token = await this.oAuth();
     const itemId = await this.createItem(formData);
     if (formData["CV"] && formData["CV"].name) {
