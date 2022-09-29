@@ -50,7 +50,7 @@ export const Form: React.FC<Props> = ({ className }) => {
 
     //Si no hay errores de validación procedemos al registro en Expa
     const register = new Register(formData as IFormData);
-    /*     const expaResponse = await register.expaRegister();
+    const expaResponse = await register.expaRegister();
 
     //Revisamos si hay errores de EXPA
     if (Object.keys(expaResponse).includes("errors")) {
@@ -61,7 +61,7 @@ export const Form: React.FC<Props> = ({ className }) => {
       setError(e);
       setLoader(false);
       return;
-    } */
+    }
 
     //Si expa ta check, procedemos a Registrar en Podio.
     register.podioRegister();
