@@ -16,7 +16,7 @@ export class Podio {
   private API_URL = "https://api.podio.com";
   private token = "No token";
 
-  async oAuth(): Promise<string> {
+  async oAuth() {
     //Se realiza la autenticación y obtenemos el token para empezar a trabajar con los metodos de la API
     const data = new FormData();
     data.append("grant_type", "app");
@@ -39,11 +39,10 @@ export class Podio {
       const token = result["access_token"];
       return token;
     } catch (err) {
-      console.error(err);
-      return "Fail";
+      return Promise.reject(err);
     }
   }
-  async createItem(formData: IFormData): Promise<number> {
+  async createItem(formData: IFormData) {
     /* Metodo para crear un nuevo Item o usuario. Obtiene la data del form.
     Retorna una promesa con el id del item */
     const headers = new Headers();
@@ -150,12 +149,11 @@ export class Podio {
       );
       const result: PodioItemResponse = await response.json();
       return result.item_id;
-    } catch (error) {
-      console.log(error);
-      return -1;
+    } catch (err) {
+      return Promise.reject(err);
     }
   }
-  async submitFile(file: IFile): Promise<number> {
+  async submitFile(file: IFile) {
     /* 
     Metodo para subir un nuevo archivo (CV). Retorna una promesa con el 
     id del archivo
@@ -177,15 +175,13 @@ export class Podio {
       const response = await fetch(`${this.API_URL}/file`, request);
       const result: PodioFileResponse = await response.json();
       return result.file_id;
-    } catch (error) {
-      console.log(error);
-      return -1;
+    } catch (err) {
+      //Si no se sube el archivo, no quiero el cliente detenga su proceso por el warning
+      console.error(`Error de P, archivo no subido: ${err}`);
+      return;
     }
   }
-  async attachFile(
-    fileId: number,
-    itemId: number
-  ): Promise<string | undefined> {
+  async attachFile(fileId: number, itemId: number) {
     /* Metodo para ligar un archivo a un item previamente creado.
     Sus parametros son el ID del archvio y el item. Retorna
     "Done!" asi nos aseguramos de que funciono todo correctamente*/
@@ -206,21 +202,30 @@ export class Podio {
 
     try {
       await fetch(`${this.API_URL}/file/${fileId}/attach`, request);
-      return "Done!";
-    } catch (error) {
-      console.log("Error");
+      return;
+    } catch (err) {
+      //Si no se attach el archivo, no quiero el cliente detenga su proceso por el warning
+      console.error(`Error de P, archivo no attached: ${err}`);
+      return;
     }
   }
-  async registerSU(formData: IFormData): Promise<void> {
+  async registerSU(formData: IFormData) {
     /* Combina los 3 metodos previamente mencionados. Tomando en cuenta que js es asíncrono y que para hacer el attach es necesario tener un items y un archivo */
-    this.token = await this.oAuth();
-    const itemId = await this.createItem(formData);
-    if (formData["CV"] && formData["CV"].name) {
-      const fileId = await this.submitFile(formData["CV"] as IFile);
-      if (itemId === -1 || fileId === -1) return;
-      const resolve = await this.attachFile(fileId, itemId);
-      console.log(resolve);
+    try {
+      this.token = await this.oAuth();
+      const itemId = await this.createItem(formData);
+
+      //Solo en caso tal de que haya CV (GTa & GTe)
+      if (formData["CV"] && formData["CV"].name) {
+        const fileId = await this.submitFile(formData["CV"] as IFile);
+        if (fileId) {
+          await this.attachFile(fileId, itemId);
+        }
+      }
+      return "¡Podio Done!";
+    } catch (err) {
+      console.error(`Error de P: ${err}`);
+      return Promise.reject(["¡Ha sucedido un error! Intente más tarde"]);
     }
-    return;
   }
 }

@@ -48,22 +48,14 @@ export const Form: React.FC<Props> = ({ className }) => {
       return;
     }
 
-    //Instanciamos la clase Register
+    //Si no hay errores de validación procedemos al registro en Expa y Podio
     const register = new Register(formData as IFormData);
-
-    //Si no hay errores de validación procedemos al registro en Expa
     try {
-      const response = await register.expaRegister();
-      console.log(response);
-    } catch (err) {
-      setError(err as Array<string>);
-      setLoader(false);
-      return;
-    }
+      const expaResponse = await register.expaRegister();
+      console.log(expaResponse);
+      const podioResponse = await register.podioRegister();
+      console.log(podioResponse);
 
-    //Si expa ta check, procedemos a Registrar en Podio.
-    try {
-      register.podioRegister();
       setSuccess(true); //triggers success page
       setLoader(false);
       return;
