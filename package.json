@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@sendgrid/mail": "^7.7.0",
     "next": "12.1.1",
-    "podio-js": "^1.6.1",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },

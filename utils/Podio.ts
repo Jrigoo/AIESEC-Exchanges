@@ -224,6 +224,16 @@ export class Podio {
       }
       return "¡Podio Done!";
     } catch (err) {
+      //Enviar mail con el error
+      fetch("/api/mail", {
+        method: "POST",
+        body: JSON.stringify({
+          user: formData,
+          error: err,
+        }),
+      })
+        .then((res) => console.log(res))
+        .catch((er) => console.log(er));
       console.error(`Error de P: ${err}`);
       return Promise.reject(["¡Ha sucedido un error! Intente más tarde"]);
     }
