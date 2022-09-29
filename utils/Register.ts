@@ -60,6 +60,7 @@ export class Register {
       const result = await response.json();
       return result;
     } catch (error) {
+      console.error(error);
       return error;
     }
   }

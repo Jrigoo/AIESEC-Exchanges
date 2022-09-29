@@ -219,6 +219,7 @@ export class Podio {
       const fileId = await this.submitFile(formData["CV"] as IFile);
       if (itemId === -1 || fileId === -1) return;
       const resolve = await this.attachFile(fileId, itemId);
+      console.log(resolve);
     }
     return;
   }

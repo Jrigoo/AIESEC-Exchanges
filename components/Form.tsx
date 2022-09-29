@@ -42,16 +42,17 @@ export const Form: React.FC<Props> = ({ className }) => {
       - Si el error es un string, como el useState recibe solo array, le pasamos: [error]
       - Si el error es un array, pasamos el array
     */
-    if (validationError) {
+    if (validationError.length > 0) {
       setLoader(false);
-      return setError(validationError);
+      setError(validationError);
+      return;
     }
 
     //Si no hay errores de validación procedemos al registro en Expa
     const register = new Register(formData as IFormData);
-    /* const expaResponse = await register.expaRegister();
+    /*     const expaResponse = await register.expaRegister();
 
-    //Revisamos si no hay errores de expa
+    //Revisamos si hay errores de EXPA
     if (Object.keys(expaResponse).includes("errors")) {
       let e = [];
       for (const err of Object.keys(expaResponse.errors)) {
@@ -62,7 +63,7 @@ export const Form: React.FC<Props> = ({ className }) => {
       return;
     } */
 
-    //Si expa ta check, procedemos a Registrar en Podio. Que debería estar check
+    //Si expa ta check, procedemos a Registrar en Podio.
     register.podioRegister();
     setSuccess(true); //triggers success page
     setLoader(false);
@@ -96,9 +97,7 @@ export const Form: React.FC<Props> = ({ className }) => {
           ))}
 
           {/* File input - Solo para Pasantias y profesores */}
-          {(Program.includes("Pasantia") || Program.includes("Profesor")) && (
-            <FileInput />
-          )}
+          {(Program === "Pasantia" || Program === "Profesor") && <FileInput />}
 
           {/* Submit button */}
           <input
