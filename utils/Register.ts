@@ -58,10 +58,19 @@ export class Register {
     try {
       const response = await fetch(url, request);
       const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error(error);
-      return error;
+      //Validamos si hay algún error de EXPA
+      if (Object.keys(result).includes("errors")) {
+        let e: Array<string> = [];
+        for (const err of Object.keys(result.errors)) {
+          e.push(`${err} ${result.errors[err][0]}`);
+        }
+        return Promise.reject(e);
+      }
+      return "¡Expa Check!";
+    } catch (err) {
+      //Si sucede un error de fetch
+      console.error(err);
+      return Promise.reject(["¡Ha sucedido un error! Intente más tarde"]);
     }
   }
   async podioRegister() {
