@@ -38,3 +38,6 @@ yarn-error.log*
 
 #API Responses
 responses/
+
+#Error Checklist
+error-checklist.md
