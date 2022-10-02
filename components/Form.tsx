@@ -32,7 +32,7 @@ export const Form: React.FC<Props> = ({ className }) => {
   const [loader, setLoader] = React.useState(false);
   const { setSuccess, Program } = useData();
 
-  const onSubmit: React.FormEventHandler = async (e): Promise<void> => {
+  const onSubmit: React.FormEventHandler = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const formData: unknown = Object.fromEntries(form.entries());
@@ -50,20 +50,28 @@ export const Form: React.FC<Props> = ({ className }) => {
 
     //Si no hay errores de validación procedemos al registro en Expa y Podio
     const register = new Register(formData as IFormData);
-    try {
-      const expaResponse = await register.expaRegister();
-      console.log(expaResponse);
-      const podioResponse = await register.podioRegister();
-      console.log(podioResponse);
+    const result = await register.expaRegister();
 
-      setSuccess(true); //triggers success page
-      setLoader(false);
-      return;
-    } catch (err) {
-      setError(err as Array<string>);
-      setLoader(false);
-      return;
+    //Validamos si hay algún error de EXPA (No lo capta el catch, viene en el response)
+    if (result || typeof result === "object") {
+      if (Object.keys(result).includes("errors")) {
+        let expaError: Array<string> = [];
+        for (const err of Object.keys(result.errors)) {
+          expaError.push(`${err} ${result.errors[err][0]}`);
+        }
+        setError(expaError);
+        setLoader(false);
+        return;
+      }
     }
+
+    //Si expa está check, registramos Podio
+    register.podioRegister();
+
+    //Una vez podio es exitoso, lanzamos succes page
+    setSuccess(true);
+    setLoader(false);
+    return;
   };
 
   return (

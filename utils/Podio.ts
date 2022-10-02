@@ -39,7 +39,11 @@ export class Podio {
       const token = result["access_token"];
       return token;
     } catch (err) {
-      return Promise.reject(err);
+      return Promise.reject({
+        type: "Token",
+        message: "Generate OAUTH token Error",
+        error: err,
+      });
     }
   }
   async createItem(formData: IFormData) {
@@ -143,6 +147,7 @@ export class Podio {
     };
 
     try {
+      throw new Error("Podio F");
       const response = await fetch(
         `${this.API_URL}/item/app/${process.env.NEXT_PUBLIC_APP_ID as string}`,
         request
@@ -150,7 +155,11 @@ export class Podio {
       const result: PodioItemResponse = await response.json();
       return result.item_id;
     } catch (err) {
-      return Promise.reject(err);
+      return Promise.reject({
+        type: "Item",
+        message: "Create Item Error",
+        error: err,
+      });
     }
   }
   async submitFile(file: IFile) {
@@ -176,9 +185,11 @@ export class Podio {
       const result: PodioFileResponse = await response.json();
       return result.file_id;
     } catch (err) {
-      //Si no se sube el archivo, no quiero el cliente detenga su proceso por el warning
-      console.error(`Error de P, archivo no subido: ${err}`);
-      return;
+      return Promise.reject({
+        type: "File",
+        message: "Submit File Error",
+        error: err,
+      });
     }
   }
   async attachFile(fileId: number, itemId: number) {
@@ -204,9 +215,11 @@ export class Podio {
       await fetch(`${this.API_URL}/file/${fileId}/attach`, request);
       return;
     } catch (err) {
-      //Si no se attach el archivo, no quiero el cliente detenga su proceso por el warning
-      console.error(`Error de P, archivo no attached: ${err}`);
-      return;
+      return Promise.reject({
+        type: "File",
+        message: "Attach File Error",
+        error: err,
+      });
     }
   }
   async registerSU(formData: IFormData) {
@@ -222,10 +235,15 @@ export class Podio {
           await this.attachFile(fileId, itemId);
         }
       }
-      return "¡Podio Done!";
+      return;
     } catch (err) {
-      console.error(`Error de P: ${err}`);
-      return Promise.reject(["¡Ha sucedido un error! Intente más tarde"]);
+      /* 
+        Todos los errores tienen la siguiente forma:
+        - type: File | Item | Token
+        - message: string
+        - error: Error default de fetch
+      */
+      return Promise.reject(err);
     }
   }
 }
