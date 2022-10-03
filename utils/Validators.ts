@@ -84,7 +84,11 @@ export class Validators {
       formData["Program"] === "Pasantia" ||
       formData["Program"] === "Profesor"
     ) {
-      if (typeof formData["CV"] !== "string" && formData["CV"].size === 0) {
+      if (
+        formData["CV"] &&
+        typeof formData["CV"] !== "string" &&
+        formData["CV"].size === 0
+      ) {
         return ["- Por favor subir la hoja de vida o CV"];
       }
     }
