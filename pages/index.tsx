@@ -4,7 +4,6 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { Provider } from "../context";
-
 import { Main } from "../components/Main";
 
 const Home: NextPage = () => {

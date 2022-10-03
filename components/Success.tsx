@@ -1,8 +1,24 @@
 import React from "react";
 import { useData } from "../hooks/useContext";
-import Image from "next/image";
-import { IFormData } from "../utils/interfaces";
 import { getRandomManager, IManager } from "../utils/Network";
+
+/* 
+//Data de prueba
+const user: IFormData = {
+  "First Name": "Ana",
+  "Last Name": "Domingo",
+  "Podio Id": 2452,
+  Email: "pk.juanr@gmail.com",
+  Password: "12345",
+  Phone: "63788834",
+  Universidad: "ADEN International Business School - Ciudad de Panamá",
+  Background: "Leyes",
+  Referral: "Evento",
+  Edad: 22,
+  Ingles: "B2 - Intermedio Alto",
+  Estudios: "Bachiller",
+  Program: "Pasantia",
+}; */
 
 export const Success = () => {
   /* 
@@ -16,8 +32,9 @@ export const Success = () => {
 
   React.useEffect(() => {
     if (user) {
-      const randomManager = getRandomManager(user as IFormData);
-      setManager(randomManager);
+      getRandomManager(user).then((random) => {
+        setManager(random);
+      });
     }
   }, [user]);
 
