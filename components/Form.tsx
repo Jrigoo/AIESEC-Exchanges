@@ -30,7 +30,7 @@ interface Props {
 export const Form: React.FC<Props> = ({ className }) => {
   const [error, setError] = React.useState<Array<string | undefined>>([]);
   const [loader, setLoader] = React.useState(false);
-  const { setSuccess, Program } = useData();
+  const { setSuccess, Program, setUser } = useData();
 
   const onSubmit: React.FormEventHandler = async (e): Promise<void> => {
     e.preventDefault();
@@ -65,6 +65,8 @@ export const Form: React.FC<Props> = ({ className }) => {
 
     //Si expa ta check, procedemos a Registrar en Podio.
     register.podioRegister();
+
+    setUser(formData as IFormData); //Hacemos un set del usuario
     setSuccess(true); //triggers success page
     setLoader(false);
     return;

@@ -6,8 +6,8 @@ interface IContext {
   setSuccess: Dispatch<SetStateAction<boolean>>;
   Program: string;
   setProgram: Dispatch<SetStateAction<string>>;
-  user: {} | IFormData;
-  setUser: Dispatch<SetStateAction<IFormData | {}>>;
+  user: undefined | IFormData;
+  setUser: Dispatch<SetStateAction<undefined | IFormData>>;
 }
 
 const defContext = {
@@ -15,7 +15,7 @@ const defContext = {
   setSuccess: () => {},
   Program: "",
   setProgram: () => {},
-  user: {},
+  user: undefined,
   setUser: () => {},
 };
 
@@ -23,7 +23,7 @@ export const Context = React.createContext<IContext>(defContext);
 export const Provider: React.FC = ({ children }) => {
   const [success, setSuccess] = React.useState(false);
   const [Program, setProgram] = React.useState<string>("");
-  const [user, setUser] = React.useState({});
+  const [user, setUser] = React.useState<IFormData | undefined>();
   return (
     <Context.Provider
       value={{

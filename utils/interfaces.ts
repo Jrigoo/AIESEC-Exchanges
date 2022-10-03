@@ -95,7 +95,7 @@ export interface IFormData {
   Ingles: INivelIngles;
   Estudios: IEstudios;
   Program: "Pasantia" | "Voluntariado" | "Profesor";
-  CV: IFile;
+  CV?: IFile;
 }
 
 /* TYPES */
@@ -125,7 +125,7 @@ export type INivelIngles =
 
 export type IUniversidad =
   | "Escuela de Arquitectura y Diseño de America Latina y el Caribe"
-  | "ISAE - Metetí| Darién"
+  | "ISAE - Metetí, Darién"
   | "UDI Universidad del Istmo - Chorrera"
   | "ISAE - La Chorrera| Pmá Oeste"
   | "Universidad de Panamá - San Miguelito"
@@ -222,7 +222,7 @@ export type IUniversidad =
   | "Universidad Latina - Chiriquí"
   | "Universidad Tecnológica Oteima - Chiriquí";
 
-export type ISegmentacion = "Santiago" | "UP" | "UTP" | "VE";
+export type ISegmentacion = "Santiago" | "UP" | "UTP";
 
 export type IEstudios =
   | "Bachiller"
