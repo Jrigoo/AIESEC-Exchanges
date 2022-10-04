@@ -2,10 +2,9 @@ import React from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-
 import { Provider } from "../context";
-
 import { Main } from "../components/Main";
+import { connectMongo } from "../db/connect.db";
 
 const Home: NextPage = () => {
   return (
@@ -40,5 +39,13 @@ const Home: NextPage = () => {
     </Provider>
   );
 };
+
+//Conectamos a la base de datos en el build
+export async function getStaticProps() {
+  await connectMongo();
+  return {
+    props: {},
+  };
+}
 
 export default Home;
