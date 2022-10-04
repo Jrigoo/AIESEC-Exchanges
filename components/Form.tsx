@@ -12,17 +12,6 @@ import { Validators } from "../utils/Validators";
 import { FORMINPUTS, DROPDOWNITEMS } from "../utils/data";
 import { IFormData } from "../utils/interfaces";
 
-/* 
-FALTA
- - Probar registro en ambas plataformas -> CHECK
- - Pagina post registro
- - Mejorar el UI con lo que mande Ingris
- - Pagina del 404
-
-MÁS ADELANTE:
- - Contacto de manager post registro
- */
-
 interface Props {
   className?: string;
 }
@@ -73,8 +62,9 @@ export const Form: React.FC<Props> = ({ className }) => {
   };
 
   return (
-    <>
+    <main className="p-5 relative min-h-screen bg-white text-zinc-800 grid place-content-center grid-cols-1 xs:grid-cols-[300px] grid-rows-[fit-content] md:grid-cols-[400px]">
       {loader && <Loader />}
+
       <form
         className={`w-full ${className}`}
         onSubmit={onSubmit}
@@ -113,6 +103,6 @@ export const Form: React.FC<Props> = ({ className }) => {
           ))}
         </section>
       </form>
-    </>
+    </main>
   );
 };

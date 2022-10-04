@@ -125,3 +125,13 @@ export const getRandomManager = async (user: IFormData) => {
     }
   }
 };
+
+export const getWhatsappMessage = (user: IFormData, manager: IManager) => {
+  const programa =
+    user["Program"] === "Pasantia"
+      ? "tomar una pasantía"
+      : user["Program"] === "Voluntariado"
+      ? "tomar un voluntariado"
+      : "ser profesor";
+  return `https://wa.me/507${manager["phone"]}?text=¡Hola ${manager["name"]}!, me acabo de registrar para ${programa} con AIESEC y me gustaría saber más información`;
+};
