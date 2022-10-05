@@ -131,7 +131,7 @@ export const Success = () => {
 
               <div className="flex py-1">
                 <FontAwesomeIcon icon={faEnvelope} className="h-5 mr-3" />
-                <p>+507 {manager["phone"]}</p>
+                <p>{manager["email"]}</p>
               </div>
             </div>
           </section>
