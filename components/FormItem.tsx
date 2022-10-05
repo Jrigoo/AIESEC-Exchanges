@@ -27,7 +27,7 @@ export const FormItem: React.FC<Props> = ({ atributos }) => {
   }
 
   return (
-    <div className="w-full mb-3 text-xs md:text-sm md:mb-5 relative">
+    <div className="w-full mb-3 md:mb-5 relative">
       {atributos.titulo && <p className="block">{atributos.titulo}</p>}
 
       {/* Solo para el password - Info*/}

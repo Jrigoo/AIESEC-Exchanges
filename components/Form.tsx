@@ -12,11 +12,7 @@ import { Validators } from "../utils/Validators";
 import { FORMINPUTS, DROPDOWNITEMS } from "../utils/data";
 import { IFormData } from "../utils/interfaces";
 
-interface Props {
-  className?: string;
-}
-
-export const Form: React.FC<Props> = ({ className }) => {
+export const Form: React.FC = () => {
   const [error, setError] = React.useState<Array<string | undefined>>([]);
   const [loader, setLoader] = React.useState(false);
   const { setSuccess, Program, setUser } = useData();
@@ -62,21 +58,22 @@ export const Form: React.FC<Props> = ({ className }) => {
   };
 
   return (
-    <main className="p-5 relative min-h-screen bg-white text-zinc-800 grid place-content-center grid-cols-1 xs:grid-cols-[300px] grid-rows-[fit-content] md:grid-cols-[400px]">
+    <main className="p-5 relative min-h-screen bg-white text-zinc-800 grid place-content-center grid-cols-1 xs:grid-cols-[300px] grid-rows-[fit-content] md:grid-cols-[400px] lg:grid-cols-[400px] 2xl:grid-cols-[450px]">
       {loader && <Loader />}
 
       <form
-        className={`w-full ${className}`}
+        className="w-full text-xs md:text-sm xl:text-base"
         onSubmit={onSubmit}
         onFocus={() => setError([])}
         noValidate
       >
-        <h1 className="mb-2 text-3xl font-extrabold tracking-wide md:text-4xl md:mb-4">
+        <h1 className="mb-2 font-extrabold tracking-normal md:mb-4 text-4xl md:text-5xl">
           Registrarse
         </h1>
-        <h2 className="mb-5 text-xs tracking-wide text-zinc-500 md:text-sm md:mb-7">
+        <h2 className="mb-5 tracking-wide text-zinc-500 md:mb-7 md:text-lg 2xl:text-xl">
           Programa de Pasantías y Voluntariados con AIESEC
         </h2>
+
         <section className="w-full mb-5">
           {/* Inputs */}
           {FORMINPUTS.map((data, idx: number) => (
@@ -94,7 +91,7 @@ export const Form: React.FC<Props> = ({ className }) => {
           {/* Submit button */}
           <input
             type="submit"
-            className={`w-full text-xs my-3 cursor-pointer rounded outline-none px-2 py-3 bg-aiesec text-notWhite font-medium hover:scale-105 transition-all duration-200 md:text-sm md:my-4`}
+            className="w-full cursor-pointer rounded outline-none px-2 py-3 bg-aiesec text-notWhite font-medium hover:scale-105 transition-all duration-200 my-3 md:my-4"
             onClick={() => setLoader(true)}
           />
           {/* Errores */}

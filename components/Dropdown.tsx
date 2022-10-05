@@ -36,7 +36,7 @@ export const Dropdown: React.FC<Props> = ({ atributos }) => {
   }, [searchValue, atributos.data]);
 
   return (
-    <div className="w-full pb-3 text-xs md:text-sm md:pb-5">
+    <div className="w-full pb-3 md:pb-5">
       {atributos.titulo && <p>{atributos.titulo}</p>}
       <input
         className="w-full bg-blue-100 rounded outline-none px-2 py-3 border border-zinc-100 focus:border-aiesec transition-all duration-300 peer"

@@ -8,12 +8,12 @@ export const Main = () => {
   const { success } = useData();
   return (
     <>
-      {!success ? (
+      {success ? (
         <Success />
       ) : (
         <>
           <nav className="w-full px-5 py-3 sticky top-0 left-0 bg-white z-50 opacity-90">
-            <div className="relative left-0 w-32 md:w-44">
+            <div className="relative left-0 w-40 sm:w-44 md:w-52 lg:w-56">
               <Image
                 src="/Images/AIESEC.png"
                 alt="AIESEC Logo"
