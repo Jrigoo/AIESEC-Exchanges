@@ -39,7 +39,7 @@ export const Success = () => {
     [5] Una vez todos los managers son escogidos, se borran todos de la base de datos y se escoge uno nuevo aleatoria
   */
   const [manager, setManager] = React.useState<IManager>();
-  const { user } = useData();
+  const { user, setLoading } = useData();
 
   React.useEffect(() => {
     if (user) {
@@ -51,7 +51,8 @@ export const Success = () => {
           console.log(err);
         });
     }
-  }, [user]);
+    setLoading(false);
+  }, [user, setLoading]);
 
   return (
     <main className="min-h-screen bg-white text-zinc-800 grid place-content-center grid-cols-1 sm:grid-cols-[repeat(2,50%)] lg:grid-rows-[100vh]">

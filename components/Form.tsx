@@ -5,7 +5,6 @@ import { Dropdown } from "./Dropdown";
 import { FileInput } from "./FileInput";
 import { Register } from "../utils/Register";
 import { Error } from "./Error";
-import { Loader } from "./Loader";
 
 import { useData } from "../hooks/useContext";
 import { Validators } from "../utils/Validators";
@@ -14,10 +13,10 @@ import { IFormData } from "../utils/interfaces";
 
 export const Form: React.FC = () => {
   const [error, setError] = React.useState<Array<string | undefined>>([]);
-  const [loader, setLoader] = React.useState(false);
-  const { setSuccess, Program, setUser } = useData();
+  const { setSuccess, Program, setUser, setLoading } = useData();
 
   const onSubmit: React.FormEventHandler = async (e): Promise<void> => {
+    setLoading(true);
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const formData: unknown = Object.fromEntries(form.entries());
@@ -28,7 +27,7 @@ export const Form: React.FC = () => {
       - Si el error es un array, pasamos el array
     */
     if (validationError.length > 0) {
-      setLoader(false);
+      setLoading(false);
       setError(validationError);
       return;
     }
@@ -44,7 +43,7 @@ export const Form: React.FC = () => {
         e.push(`${err} ${expaResponse.errors[err][0]}`);
       }
       setError(e);
-      setLoader(false);
+      setLoading(false);
       return;
     }
 
@@ -53,14 +52,11 @@ export const Form: React.FC = () => {
 
     setUser(formData as IFormData); //Hacemos un set del usuario
     setSuccess(true); //triggers success page
-    setLoader(false);
     return;
   };
 
   return (
     <main className="p-5 relative min-h-screen bg-white text-zinc-800 grid place-content-center grid-cols-1 xs:grid-cols-[300px] grid-rows-[fit-content] md:grid-cols-[400px] lg:grid-cols-[400px] 2xl:grid-cols-[450px]">
-      {loader && <Loader />}
-
       <form
         className="w-full text-xs md:text-sm xl:text-base"
         onSubmit={onSubmit}
@@ -92,7 +88,6 @@ export const Form: React.FC = () => {
           <input
             type="submit"
             className="w-full cursor-pointer rounded outline-none px-2 py-3 bg-aiesec text-notWhite font-medium hover:scale-105 transition-all duration-200 my-3 md:my-4"
-            onClick={() => setLoader(true)}
           />
           {/* Errores */}
           {error.map((err, idx) => (

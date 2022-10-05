@@ -3,11 +3,13 @@ import Image from "next/image";
 import { Form } from "../components/Form";
 import { Success } from "../components/Success";
 import { useData } from "../hooks/useContext";
+import { Loader } from "./Loader";
 
 export const Main = () => {
-  const { success } = useData();
+  const { success, loading } = useData();
   return (
     <>
+      {loading && <Loader />}
       {success ? (
         <Success />
       ) : (
