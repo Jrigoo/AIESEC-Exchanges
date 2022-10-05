@@ -54,12 +54,12 @@ export const Success = () => {
   }, [user]);
 
   return (
-    <main className="min-h-[90vh] bg-white text-zinc-800 grid place-content-center grid-cols-1 lg:grid-cols-[repeat(2,50%)]">
-      {/* Main Information */}
-      <div className="p-10">
-        {/* AIESEC LOGO */}
-        <section className="text-center md:text-left">
-          <div className="relative mb-10 w-32 md:w-56 ">
+    <main className="min-h-screen bg-white text-zinc-800 grid place-content-center grid-cols-1 sm:grid-cols-[repeat(2,50%)] lg:grid-rows-[100vh]">
+      {/* TODA LA INFORMACIÓN */}
+      <div className="h-full self-center px-4 xs:p-10 sm:pt-10 sm:p-5 md:p-14">
+        <section className="text-center sm:text-left">
+          {/* AIESEC LOGO */}
+          <div className="relative mb-10 w-32 xs:w-44 md:w-56 2xl:w-72">
             <Image
               src="/Images/AIESEC.png"
               alt="AIESEC Logo"
@@ -69,11 +69,12 @@ export const Success = () => {
               className="object-contain"
             />
           </div>
+
           {/* Title */}
-          <h1 className="mb-2 text-4xl font-extrabold tracking-wide md:text-5xl">
+          <h1 className="mb-2 font-extrabold text-4xl md:text-5xl 2xl:text-6xl">
             ¡Te has registrado de manera exitosa!
           </h1>
-          <h2 className="mb-2 text-base font-normal md:text-lg">
+          <h2 className="mb-2 font-normal text-base md:text-lg 2xl:text-xl">
             Ingresa a tu cuenta en{" "}
             <a
               href="https://auth.aiesec.org/users/sign_in?country=#login"
@@ -85,9 +86,9 @@ export const Success = () => {
         </section>
         <hr />
 
-        {/* Contact Info. */}
+        {/* Contact Info. - Si existe un user y un manager*/}
         {user && manager ? (
-          <section className="py-5 text-left">
+          <section className="py-5 text-left text-sm md:text-base 2xl:text-lg">
             <p className="mb-5">
               Para <b>más información</b>, puedes contactarte con{" "}
               {manager["genre"] === "female"
@@ -96,7 +97,7 @@ export const Success = () => {
               :
             </p>
 
-            <h1 className="text-3xl font-bold md:text-4xl">
+            <h1 className="text-3xl font-bold md:text-4xl 2xl:text-5xl">
               {manager["name"]}
             </h1>
             <h2 className="pt-2 font-semibold">
@@ -105,7 +106,7 @@ export const Success = () => {
             </h2>
 
             {/* Icons - Contact Info. */}
-            <div className="py-1 text-sm">
+            <div className="py-1">
               <div className="flex py-1">
                 <FontAwesomeIcon icon={faPhone} className="h-5 mr-3" />
                 <p>+507 {manager["phone"]}</p>
@@ -132,7 +133,7 @@ export const Success = () => {
             </div>
           </section>
         ) : (
-          <p className="py-5 text-center md:text-left md:pr-20">
+          <p className="py-5 text-center text-base sm:text-left md:text-lg 2xl:text-xl">
             Debes ser contactad@ por whatsapp en las próximas 48 horas por uno
             de nuestros asesores
           </p>
@@ -140,7 +141,7 @@ export const Success = () => {
       </div>
 
       {/* Image */}
-      <div className="relative h-screen hidden lg:block">
+      <div className="relative h-full hidden sm:block">
         <Image
           src="/Images/Submit-Photo.jpg"
           layout="fill"
