@@ -23,6 +23,7 @@ export const Main = () => {
                 width={640}
                 height={131}
                 className="object-contain w-full h-full"
+                loading="lazy"
               />
             </div>
           </nav>

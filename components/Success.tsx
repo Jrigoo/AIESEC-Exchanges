@@ -46,12 +46,13 @@ export const Success = () => {
       getRandomManager(user as IFormData)
         .then((newManager) => {
           setManager(newManager);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setLoading(false);
         });
     }
-    setLoading(false);
   }, [user, setLoading]);
 
   return (
@@ -68,6 +69,7 @@ export const Success = () => {
               width={640}
               height={131}
               className="object-contain"
+              loading="lazy"
             />
           </div>
 
@@ -148,6 +150,7 @@ export const Success = () => {
           layout="fill"
           alt="Professional image"
           className="object-cover"
+          loading="lazy"
         />
       </div>
     </main>
