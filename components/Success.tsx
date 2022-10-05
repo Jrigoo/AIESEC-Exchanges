@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-REGULAR-svg-icons";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
 /* const user: IFormData = {
   "First Name": "Juan",
