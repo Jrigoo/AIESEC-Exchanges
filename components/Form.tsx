@@ -33,7 +33,7 @@ export const Form: React.FC = () => {
     }
 
     //Si no hay errores de validación procedemos al registro en Expa
-    /*     const register = new Register(formData as IFormData);
+    const register = new Register(formData as IFormData);
     const expaResponse = await register.expaRegister();
 
     //Revisamos si hay errores de EXPA
@@ -48,7 +48,7 @@ export const Form: React.FC = () => {
     }
 
     //Si expa ta check, procedemos a Registrar en Podio.
-    register.podioRegister(); */
+    register.podioRegister();
 
     setUser(formData as IFormData); //Hacemos un set del usuario
     setSuccess(true); //triggers success page

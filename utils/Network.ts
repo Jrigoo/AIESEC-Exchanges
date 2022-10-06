@@ -133,5 +133,7 @@ export const getWhatsappMessage = (user: IFormData, manager: IManager) => {
       : user["Program"] === "Voluntariado"
       ? "tomar un voluntariado"
       : "ser profesor";
-  return `https://wa.me/507${manager["phone"]}?text=¡Hola ${manager["name"]}!, me acabo de registrar para ${programa} con AIESEC y me gustaría saber más información`;
+  return `https://wa.me/507${manager["phone"]}?text=¡Hola ${
+    manager["name"].split(" ")[0]
+  }! me acabo de registrar para ${programa} con AIESEC y me gustaría saber más información`;
 };
