@@ -48,8 +48,7 @@ export const Success = () => {
           setManager(newManager);
           setLoading(false);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           setLoading(false);
         });
     }

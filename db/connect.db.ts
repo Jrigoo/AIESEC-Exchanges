@@ -7,6 +7,6 @@ export const connectMongo = async () => {
       console.log("DB is connected");
     }
   } catch (err) {
-    console.error("Couldn't connect db");
+    return Promise.reject({ error: "Couldn't connect db" });
   }
 };

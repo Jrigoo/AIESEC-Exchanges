@@ -7,11 +7,11 @@ export default async function handleManager(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (mongoose.connection.readyState !== 1) {
-    await connectMongo();
-  }
-
   try {
+    if (mongoose.connection.readyState === 0) {
+      await connectMongo();
+    }
+
     //Traer todos lo managers
     if (req.method === "GET") {
       const { lc } = req.query;

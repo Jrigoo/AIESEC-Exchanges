@@ -24,7 +24,11 @@ const Home: NextPage = () => {
 
 //Conectamos a la base de datos en el build
 export async function getStaticProps() {
-  await connectMongo();
+  try {
+    await connectMongo();
+  } catch (err) {
+    console.error(err);
+  }
   return {
     props: {},
   };

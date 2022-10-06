@@ -3,45 +3,56 @@ import { IManager } from "../utils/Network";
 export class FetchAPI {
   static async getAllManagers() {
     try {
-      const data = await fetch("/api", {
+      const response = await fetch("/api", {
         method: "GET",
       });
-      const result = await data.json();
-      return result;
-    } catch (err: any) {
+      if (response.ok) {
+        const result = await response.json();
+        return result;
+      }
+      return Promise.reject({ error: "Response 5xx or 4xx" });
+    } catch (err) {
       return Promise.reject(err);
     }
   }
   static async getManagersByLC(lc: string) {
     try {
-      const data = await fetch(`/api/${lc}`, {
+      const response = await fetch(`/api/${lc}`, {
         method: "GET",
       });
-      const result = await data.json();
-      return result;
-    } catch (err: any) {
+      if (response.ok) {
+        const result = await response.json();
+        return result;
+      }
+      return Promise.reject({ error: "Response 5xx or 4xx" });
+    } catch (err) {
       return Promise.reject(err);
     }
   }
   static async addManager(manager: IManager) {
     try {
-      await fetch("/api", {
+      const response = await fetch("/api", {
         method: "POST",
         body: JSON.stringify(manager),
       });
-      return "Manager Created!";
-    } catch (err: any) {
+      if (response.ok) {
+        return "Manager Created!";
+      }
+      return Promise.reject({ error: "Response 5xx or 4xx" });
+    } catch (err) {
       return Promise.reject(err);
     }
   }
   static async deleteManagersByLC(lc: string) {
     try {
-      await fetch(`/api/${lc}`, {
+      const response = await fetch(`/api/${lc}`, {
         method: "DELETE",
       });
-
-      return "Managers Deleted!";
-    } catch (err: any) {
+      if (response.ok) {
+        return "Managers by LC Deleted!";
+      }
+      return Promise.reject({ error: "Response 5xx or 4xx" });
+    } catch (err) {
       return Promise.reject(err);
     }
   }

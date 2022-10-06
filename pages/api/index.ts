@@ -7,12 +7,12 @@ export default async function handleManager(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (mongoose.connection.readyState === 0) {
-    //Si la base de datos esta off por x motivo
-    await connectMongo();
-  }
-
   try {
+    if (mongoose.connection.readyState === 0) {
+      //Si la base de datos esta off por x motivo
+      await connectMongo();
+    }
+
     //Traer todos lo managers
     if (req.method === "GET") {
       const response = await ManagerDAO.getAllManagers();
