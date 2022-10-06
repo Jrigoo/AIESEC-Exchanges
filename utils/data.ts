@@ -7,7 +7,7 @@ USMA -> 1473
 COCLE -> 2453
 UP -> 1949
 SANTIAGO -> 1707
-VE -> 2008
+VE -> [2008, 6],
 */
 
 import { IAtributos } from "./interfaces";
@@ -116,7 +116,6 @@ export const SEGMENTACION = {
     "No estudiando actualmente - UTP",
     "Universidad Tecnológica de Panamá - Sede Ciudad de Panamá",
   ],
-  VE: [""],
 };
 
 /* IDs de EXPA y Podio */
@@ -126,7 +125,6 @@ export const LCIDs = {
   Santiago: [1707, 4],
   UP: [1949, 2],
   UTP: [193, 1],
-  VE: [2008, 6],
 };
 
 export const UNIVERSIDADES = [

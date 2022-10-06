@@ -95,7 +95,7 @@ export interface IFormData {
   Ingles: INivelIngles;
   Estudios: IEstudios;
   Program: "Pasantia" | "Voluntariado" | "Profesor";
-  CV: IFile;
+  CV?: IFile;
 }
 
 /* TYPES */
@@ -125,9 +125,9 @@ export type INivelIngles =
 
 export type IUniversidad =
   | "Escuela de Arquitectura y Diseño de America Latina y el Caribe"
-  | "ISAE - Metetí| Darién"
+  | "ISAE - Metetí, Darién"
   | "UDI Universidad del Istmo - Chorrera"
-  | "ISAE - La Chorrera| Pmá Oeste"
+  | "ISAE - La Chorrera, Pmá Oeste"
   | "Universidad de Panamá - San Miguelito"
   | "USMA - Colón"
   | "Universidad Santander"
@@ -191,7 +191,7 @@ export type IUniversidad =
   | "No estudiando actualmente - Veraguas"
   | "Universidad Tecnológica Oteima - Santiago"
   | "UDELAS - Veraguas"
-  | "ISAE - Santiago| Veraguas"
+  | "ISAE - Santiago, Veraguas"
   | "Universidad de Panamá - Veraguas"
   | "Universidad de Panamá - Los Santos"
   | "Universidad Latina - Chitré"
@@ -199,13 +199,13 @@ export type IUniversidad =
   | "No estudiando actualmente - Coclé"
   | "Universidad Latina de Panamá - Sede Chitré"
   | "UDI Universidad del Istmo - Chitré"
-  | "ISAE - Chitré| Herrera"
+  | "ISAE - Chitré, Herrera"
   | "USMA - Chitré"
   | "UDI Universidad del Istmo - Las Tablas"
   | "UDELAS - Coclé"
   | "Universidad de Panamá - Coclé"
   | "Universidad Tecnológica de Panamá - Coclé"
-  | "ISAE - Penonomé| Coclé"
+  | "ISAE - Penonomé, Coclé"
   | "Universidad Latina - Penonomé"
   | "Universidad Tecnológica de Panamá - Chiriquí"
   | "No estudiando actualmente - Chiriqui"
@@ -217,12 +217,12 @@ export type IUniversidad =
   | "Universidad Autonoma de Chiriquí (UNACHI)"
   | "Universidad de Cartago"
   | "UDI Universidad del Istmo - Chiriquí"
-  | "ISAE - Changuinola| Bocas del Toro"
-  | "ISAE - David| Chiriquí"
+  | "ISAE - Changuinola, Bocas del Toro"
+  | "ISAE - David, Chiriquí"
   | "Universidad Latina - Chiriquí"
   | "Universidad Tecnológica Oteima - Chiriquí";
 
-export type ISegmentacion = "Santiago" | "UP" | "UTP" | "VE";
+export type ISegmentacion = "Santiago" | "UP" | "UTP";
 
 export type IEstudios =
   | "Bachiller"
