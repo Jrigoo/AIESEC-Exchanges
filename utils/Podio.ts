@@ -130,9 +130,9 @@ export class Podio {
         },
         {
           type: "category",
-          field_id: 233431631,
-          label: "Contactado",
-          values: [2],
+          field_id: 233431633,
+          label: "Status",
+          values: [11],
         },
       ],
     });
