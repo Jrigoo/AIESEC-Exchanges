@@ -26,22 +26,10 @@ const network = {
       email: "zurisadai.zuniga4@aiesec.net ",
     },
     {
-      name: "Erick Espinosa",
-      phone: "68714072",
-      genre: "male",
-      email: "erick.espinosa2@aiesec.net",
-    },
-    {
       name: "Rogelio Paredes",
       phone: "67464481",
       genre: "male",
       email: "rogelio.paredes@aiesec.net",
-    },
-    {
-      name: "Nabila Murillo",
-      phone: "66206564",
-      genre: "female",
-      email: "nabila.murillo@aiesec.net",
     },
   ],
   UP: [
