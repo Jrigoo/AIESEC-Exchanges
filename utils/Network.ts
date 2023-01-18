@@ -18,59 +18,23 @@ const network = {
       phone: "63788834",
       genre: "female",
       email: "ana.domingo@aiesec.net",
-    },
-    {
-      name: "Zurisadai Zuñiga",
-      phone: "68577411",
-      genre: "female",
-      email: "zurisadai.zuniga4@aiesec.net ",
-    },
-    {
-      name: "Rogelio Paredes",
-      phone: "67464481",
-      genre: "male",
-      email: "rogelio.paredes@aiesec.net",
-    },
+    }
   ],
   UP: [
     {
-      name: "Madelyne Miranda",
-      phone: "63511402",
+      name: "Ana Domingo",
+      phone: "63788834",
       genre: "female",
-      email: "madelyne.miranda@aiesec.net",
-    },
-    {
-      name: "Luigi Yau",
-      phone: "60754488",
-      genre: "male",
-      email: "luigi.yau2@aiesec.net",
-    },
-    {
-      name: "Maurielka White",
-      phone: "68187189",
-      genre: "female",
-      email: "mcwc15@aiesec.net",
-    },
-    {
-      name: "Grace Mitre",
-      phone: "62790854",
-      genre: "female",
-      email: "grace.mitre@aiesec.net",
-    },
+      email: "ana.domingo@aiesec.net",
+    }
   ],
   Santiago: [
     {
-      name: "Damaris Cerrud",
-      phone: "65033438",
+      name: "Ana Domingo",
+      phone: "63788834",
       genre: "female",
-      email: "damaris.cerrud3@aiesec.net",
-    },
-    {
-      name: "Zuleimy Powell",
-      phone: "69061086",
-      genre: "female",
-      email: "zuleimy.powell@aiesec.net",
-    },
+      email: "ana.domingo@aiesec.net",
+    }
   ],
 };
 
