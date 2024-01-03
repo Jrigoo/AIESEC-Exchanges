@@ -1,6 +1,5 @@
 import { SEGMENTACION } from "./data";
 import { IFormData, ISegmentacion, IUniversidad } from "./interfaces";
-
 import { FetchAPI } from "../client/FetchAPI";
 
 export interface IManager {
@@ -14,26 +13,26 @@ export interface IManager {
 const network = {
   UTP: [
     {
-      name: "Ana Domingo",
-      phone: "63788834",
-      genre: "female",
-      email: "ana.domingo@aiesec.net",
+      name: "Mateo Rosales",
+      phone: "59179769932",
+      genre: "male",
+      email: "experiencias@aiesec.org.pa",
     }
   ],
   UP: [
     {
-      name: "Ana Domingo",
-      phone: "63788834",
-      genre: "female",
-      email: "ana.domingo@aiesec.net",
+      name: "Mateo Rosales",
+      phone: "59179769932",
+      genre: "male",
+      email: "experiencias@aiesec.org.pa",
     }
   ],
   Santiago: [
     {
-      name: "Ana Domingo",
-      phone: "63788834",
-      genre: "female",
-      email: "ana.domingo@aiesec.net",
+      name: "Mateo Rosales",
+      phone: "59179769932",
+      genre: "male",
+      email: "experiencias@aiesec.org.pa",
     }
   ],
 };
