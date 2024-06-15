@@ -13,26 +13,26 @@ export interface IManager {
 const network = {
   UTP: [
     {
-      name: "Mateo Rosales",
-      phone: "59179769932",
+      name: "Erick Diez",
+      phone: "50766270038",
       genre: "male",
-      email: "experiencias@aiesec.org.pa",
+      email: "erick.diez@aiesec.net",
     }
   ],
   UP: [
     {
-      name: "Mateo Rosales",
-      phone: "59179769932",
+      name: "Erick Diez",
+      phone: "50766270038",
       genre: "male",
-      email: "experiencias@aiesec.org.pa",
+      email: "erick.diez@aiesec.net",
     }
   ],
   Santiago: [
     {
-      name: "Mateo Rosales",
-      phone: "59179769932",
+      name: "Erick Diez",
+      phone: "50766270038",
       genre: "male",
-      email: "experiencias@aiesec.org.pa",
+      email: "erick.diez@aiesec.net",
     }
   ],
 };
